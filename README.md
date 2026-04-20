@@ -20,7 +20,7 @@ I used ChatGPT to help with the setup. Much of the specifics were lost to that c
 
 1) pull images of each utility into docker
 
-    ```bash
+    ```sh
     docker pull ghcr.io/netbymatt/ws4kp:latest
     docker pull ghcr.io/rice9797/ws4channels:latest
     docker pull alturismo/xteve:latest
@@ -28,16 +28,16 @@ I used ChatGPT to help with the setup. Much of the specifics were lost to that c
 
 2) start up each docker image (this file currently only handles the wk* utilities; xteve needs to be started manually)
 
-    ```bash
+    ```sh
     # in the same directory as docker-compose.yml
     docker compose up -d
     ```
 
-3) `ws4kp` should be running at http://<server-ip>:8080
+3) `ws4kp` runs at `http://<server-ip>:8080`
 
-4) `ws4channels` should be publishing a playlist to http://<server-ip>:9798/playlist.m3u and XML Guide to http://<server-ip>:9798/guide.xml
+4) `ws4channels` publishes a playlist at `http://<server-ip>:9798/playlist.m3u` and XML Guide at `http://<server-ip>:9798/guide.xml`
 
-5) `xteve` has a WebUI at http://<server-ip>:34400/web/ where a lot of the configuration will take place
+5) `xteve` has a WebUI at `http://<server-ip>:34400/web/` where a lot of the configuration will take place
 
 6) add a Tuner/DVR in Plex; it should auto-detect but Guide XML must be provided in step 1
 
