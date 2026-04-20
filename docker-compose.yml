@@ -1,0 +1,36 @@
+services:
+  ws4kp:
+    image: ghcr.io/netbymatt/ws4kp:latest
+    container_name: ws4kp
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    environment:
+      WSQS_settings_wide_checkbox: "true"
+      WSQS_hourly_checkbox: "true"
+      WSQS_hourly_graph_checkbox: "true"
+      WSQS_travel_checkbox: "true"
+      WSQS_hazards_checkbox: "true"
+      WSQS_current_weather_checkbox: "true"
+      WSQS_latest_observations_checkbox: "true"
+      WSQS_regional_forecast_checkbox: "true"
+      WSQS_local_forecast_checkbox: "true"
+      WSQS_extended_forecast_checkbox: "true"
+      WSQS_almanac_checkbox: "true"
+      WSQS_spc_outlook_checkbox: "true"
+      WSQS_radar_checkbox: "true"
+      WSQS_settings_customTextEnable_checkbox: "true"
+      WSQS_settings_customText_string: "Enjoy unlimited weather vibes, Babe | Feeling sad or angry? Try hugging a dog | Have you eaten today, Rachel?" 
+
+  ws4channels:
+    image: ghcr.io/rice9797/ws4channels:latest
+    container_name: ws4channels
+    restart: unless-stopped
+    depends_on:
+      - ws4kp
+    ports:
+      - "9798:9798"
+    environment:
+      - ZIP_CODE=78750
+      - WS4KP_HOST=ws4kp
+      - WS4KP_PORT=8080
