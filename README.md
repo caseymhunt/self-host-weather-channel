@@ -2,6 +2,8 @@
 
 A personal documentation of lessons learned while setting up [ws4kp](https://github.com/netbymatt/ws4kp) for home streaming via ws4channels, xTeVe, Plex, and Apple TV.
 
+[WeatherStar 4000+](screenshot.png)
+
 ---
 
 ## Stack Overview
