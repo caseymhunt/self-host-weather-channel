@@ -8,6 +8,9 @@ services:
     env_file:
       - settings.env
       - messages.env
+    volumes:
+      - ./music:/usr/share/nginx/html/music
+
 
   ws4channels:
     image: ghcr.io/rice9797/ws4channels:latest
@@ -17,10 +20,16 @@ services:
       - ws4kp
     ports:
       - "9798:9798"
+    devices:
+      - /dev/dri:/dev/dri
+    volumes:
+      - ./music:/app/music
     environment:
       - ZIP_CODE=${ZIP_CODE}
       - WS4KP_HOST=ws4kp
       - WS4KP_PORT=8080
+      - VIDEO_OPTIONS=-c:v h264_qsv -b:v 1000k
+
 
   xteve:
     image: dnsforge/xteve:latest
