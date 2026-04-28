@@ -2,9 +2,7 @@
 
 A personal documentation of lessons learned while setting up [ws4kp](https://github.com/netbymatt/ws4kp) for home streaming via ws4channels, xTeVe, Plex, and Apple TV.
 
-![WeatherStar 4000+](screenshot.png)
-
-
+[![WeatherStar 4000+](screenshot.png)](screenshot.png)
 
 ---
 
@@ -73,6 +71,7 @@ Your project directory should look like this:
 ├── settings.env         # Your location, display settings and screen toggles
 ├── messages.txt         # Your scrolling banner messages
 ├── messages.env         # Generated from messages.txt — do not edit directly
+├── music/               # MP3 files served to both ws4kp and ws4channels
 └── .gitignore
 ```
 
@@ -200,6 +199,19 @@ Always use `make` commands instead of running `docker compose` directly. This en
 | `make logs` | Tail logs for all containers |
 
 > **Note:** To apply changes to `settings.env` or `messages.txt`, always use `make down && make up` — a plain `make restart` will not re-read environment files.
+
+### Managing Music
+
+Background music is served to both ws4kp (browser preview) and ws4channels (TV stream) from the `music/` folder in the project directory. Both containers mount this folder, so any changes apply to both simultaneously.
+
+To add or remove tracks, simply add or delete MP3 files from the `music/` folder and restart:
+```bash
+make restart
+```
+
+Unlike messages or settings, music changes do not require `make down && make up` — a plain restart is sufficient since the music folder is a volume mount, not an environment variable.
+
+> **Note:** Subdirectories inside `music/` are not scanned — all MP3s must be in the root of the folder.
 
 ### Managing Display Settings
 All user configuration lives in `settings.env` — location, display toggles, and playback preferences. Edit this file directly to customize your setup. Unlike `messages.env`, this file is hand-edited and committed to git.
