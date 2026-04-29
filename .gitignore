@@ -1,2 +1,6 @@
 # Generated files - do not commit
 messages.env
+
+# User configuration - personalized files should not be committed
+messages.txt
+settings.env

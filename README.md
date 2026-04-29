@@ -62,30 +62,39 @@ git clone <your-repo-url> ~/weather-channel
 cd ~/weather-channel
 ```
 
+Copy the example configuration files:
+```bash
+cp settings.env.example settings.env
+cp messages.txt.example messages.txt
+```
+
 Your project directory should look like this:
 
 ```
 ~/weather-channel/
 ├── docker-compose.yml   # Stack definition
 ├── Makefile             # Project commands
-├── settings.env         # Your location, display settings and screen toggles
-├── messages.txt         # Your scrolling banner messages
+├── settings.env         # Your location, display settings and screen toggles (copy from .example)
+├── settings.env.example # Template — do not edit
+├── messages.txt         # Your scrolling banner messages (copy from .example)
+├── messages.txt.example # Template — do not edit
 ├── messages.env         # Generated from messages.txt — do not edit directly
 ├── music/               # MP3 files served to both ws4kp and ws4channels
 └── .gitignore
 ```
 
-### Step 2: Review your settings
-Open `settings.env` and update `ZIP_CODE` to your local zip code. You can also enable or disable weather screens — each checkbox line controls one screen. Change `true` to `false` for any screens you don't want.
+### Step 2: Customize your settings
+Edit `settings.env` with your zip code and display preferences:
+```bash
+nano settings.env
+```
 
-### Step 3: Edit your messages
-Open `messages.txt` and replace the example messages with your own:
+Edit `messages.txt` with your custom scrolling banner messages:
 ```bash
 nano messages.txt
 ```
-One message per line. Do not use the `|` character. Save with `Ctrl+X`, then `Y`, then `Enter`.
 
-### Step 4: Start the containers
+### Step 3: Start the containers
 ```bash
 make up
 ```
@@ -97,7 +106,7 @@ docker ps
 ```
 You should see `ws4kp`, `ws4channels`, and `xteve` all listed with a status of `Up`.
 
-### Step 5: Verify the stream
+### Step 4: Verify the stream
 Before setting up Plex, confirm the stream is working by opening this URL in a browser or VLC on any device on your network:
 ```
 http://SERVER_IP:9798/stream/stream.m3u8
@@ -107,7 +116,7 @@ You should see the WeatherStar 4000 display after a few seconds. If it does not 
 make logs
 ```
 
-### Step 6: Configure xTeVe
+### Step 5: Configure xTeVe
 Open the xTeVe web UI at `http://SERVER_IP:34400/web/` and complete the setup wizard:
 
 1. When asked for a playlist source, enter:
@@ -129,7 +138,7 @@ Open the xTeVe web UI at `http://SERVER_IP:34400/web/` and complete the setup wi
    make restart
    ```
 
-### Step 7: Configure Plex Live TV
+### Step 6: Configure Plex Live TV
 1. In Plex, go to **Settings → Live TV & DVR → Set Up Plex DVR**
 2. Plex should auto-discover xTeVe as a tuner on your network. If it does not, enter your server IP manually: `http://SERVER_IP:34400`
 3. When prompted for guide data, enter the xTeVe XMLTV URL:
@@ -138,7 +147,7 @@ Open the xTeVe web UI at `http://SERVER_IP:34400/web/` and complete the setup wi
    ```
 4. Complete the wizard and confirm the WeatherStar 4000 channel appears in your channel list
 
-### Step 8: Test on Apple TV
+### Step 7: Test on Apple TV
 Open the Plex app on your Apple TV, navigate to **Live TV**, and tune the WeatherStar channel. The stream may take a few seconds to start. If it loads indefinitely, refer to the Troubleshooting section below.
 
 ---
